@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Mi San Valentín 💖</title>
+
+  <style>
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .box {
+      background: rgba(255,255,255,0.2);
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 550px;
+      width: 90%;
+      box-shadow: 0 0 25px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    h2 {
+      margin-top: 20px;
+    }
+
+    /* Carta */
+
+    .envelope {
+      width: 200px;
+      height: 140px;
+      background: #ff2d55;
+      margin: 0 auto 25px;
+      position: relative;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .envelope:hover {
+      transform: scale(1.05);
+    }
+
+    .envelope::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 100px solid transparent;
+      border-right: 100px solid transparent;
+      border-top: 70px solid #ff4f70;
+    }
+
+    .envelope-text {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      font-weight: bold;
+    }
+
+    /* Contenido oculto */
+
+    .content {
+      display: none;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Carta */
+
+    .letter {
+      background: rgba(255,255,255,0.25);
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    /* Botones */
+
+    .buttons {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 12px 28px;
+      border: none;
+      border-radius: 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #yes {
+      background: #ff2d55;
+      color: white;
+      font-weight: bold;
+    }
+
+    #yes:hover {
+      transform: scale(1.1);
+    }
+
+    #no {
+      background: white;
+      color: #ff2d55;
+      font-weight: bold;
+    }
+
+    /* Mensajes */
+
+    #msgNo {
+      margin-top: 15px;
+      font-size: 1.1rem;
+      min-height: 30px;
+    }
+
+    #msgYes {
+      margin-top: 20px;
+      font-size: 1.4rem;
+      font-weight: bold;
+      display: none;
+      animation: pop 0.5s ease;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.5); }
+      to { transform: scale(1); }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+
+    <!-- Carta cerrada -->
+
+    <div id="envelope" class="envelope">
+      <div class="envelope-text">💌 Ábreme 💌</div>
+    </div>
+
+
+    <!-- Contenido -->
+
+    <div id="content" class="content">
+
+      <h1>💖 Mafer 💖</h1>
+
+      <div class="letter">
+        Desde que llegaste a mi vida, todo cambió para mejor💕<br><br>
+
+        Cada día que paso a tu lado es como una medicina para que mi corazón sea
+        feliz, cada momento contigo es especial y seria el hombre mas feliz si esto 
+        perdura para toda la vida. Solo quiero que sepas que te amo con todo mi corazón
+         y que eres lo mejor que me ha pasado😍
+        <br><br>
+        Gracias por existir, por quererme y por hacerme tan feliz😘<br>
+        Y para esto quiero hacerte la siguiente pregunta...<br>
+      </div>
+
+      <h2>¿Quieres ser mi San Valentín? 💘</h2>
+
+      <!-- Mensaje NO -->
+      <div id="msgNo"></div>
+
+      <div class="buttons">
+        <button id="yes">Sí 💖</button>
+        <button id="no">No 💔</button>
+      </div>
+
+      <!-- Mensaje SI -->
+      <div id="msgYes"></div>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    const envelope = document.getElementById("envelope");
+    const content = document.getElementById("content");
+
+    const yes = document.getElementById("yes");
+    const no = document.getElementById("no");
+
+    const msgNo = document.getElementById("msgNo");
+    const msgYes = document.getElementById("msgYes");
+
+
+    /* Abrir carta */
+
+    envelope.addEventListener("click", () => {
+
+      envelope.style.display = "none";
+      content.style.display = "block";
+
+    });
+
+
+    /* Mensajes NO */
+
+    const frases = [
+      "¿Estás segura? 😢",
+      "No puedo creerlo 😞",
+      "Vamos, di que sí 💕",
+      "No seas mala 😔",
+      "Piénsalo bien, amor 💭",
+      "Vamos, di que sí 💕",
+      "Jamás te lo perdonaré💔",
+      "Inténtalo otra vez 😅",
+      "Eres una ratita mala 🐭💔 ",
+      "OYE QUE TIENEEEEEES",
+      "Bastaaaaa 😭",
+      
+
+    
+    ];
+
+    let count = 0;
+
+    no.addEventListener("click", () => {
+
+      msgNo.textContent = frases[count % frases.length];
+      count++;
+
+    });
+
+
+    /* Mensaje SI */
+
+    yes.addEventListener("click", () => {
+
+      msgYes.style.display = "block";
+
+      msgYes.innerHTML = "💖 ¡Sabía que dirías que sí! 💖<br>Te amo muchísimo 😍🌹";
+
+      yes.disabled = true;
+      no.disabled = true;
+
+      yes.style.opacity = "0.6";
+      no.style.opacity = "0.6";
+
+      msgNo.textContent = "";
+
+    });
+
+  </script>
+
+</body>
+</html>
